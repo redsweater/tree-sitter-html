@@ -4,6 +4,7 @@
 (attribute_name) @attribute
 (attribute_value) @string
 (comment) @comment
+(entity) @text.entity
 
 [
   "<"
