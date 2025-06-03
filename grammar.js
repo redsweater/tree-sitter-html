@@ -1,12 +1,10 @@
 /**
  * @file HTML grammar for tree-sitter
- * @author Max Brunsfeld
+ * @author Max Brunsfeld <maxbrunsfeld@gmail.com>
+ * @author Amaan Qureshi <amaanq12@gmail.com>
  * @license MIT
  */
 
-/* eslint-disable arrow-parens */
-/* eslint-disable camelcase */
-/* eslint-disable-next-line spaced-comment */
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
@@ -31,7 +29,7 @@ module.exports = grammar({
   ],
 
   rules: {
-    fragment: $ => repeat($._node),
+    document: $ => repeat($._node),
 
     doctype: $ => seq(
       '<!',
@@ -131,7 +129,7 @@ module.exports = grammar({
     // An entity can be named, numeric (decimal), or numeric (hexacecimal). The
     // longest entity name is 29 characters long, and the HTML spec says that
     // no more will ever be added.
-    entity: _ => /&(#([xX][0-9a-fA-F]{1,6}|[0-9]{1,5})|[A-Za-z]{1,30});/,
+    entity: _ => /&(#([xX][0-9a-fA-F]{1,6}|[0-9]{1,5})|[A-Za-z]{1,30});?/,
 
     quoted_attribute_value: $ => choice(
       seq('\'', optional(alias(/[^']+/, $.attribute_value)), '\''),
